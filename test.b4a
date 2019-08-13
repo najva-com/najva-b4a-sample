@@ -41,7 +41,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	
 	Dim	najva As NajvaB4aPlugin
 	
-	najva.initialize(1247581, 5906, "6af84b7c-82ea-4f1f-9ef6-07e886c439f0")
+	najva.initialize(CAMPAIGN_ID, WEBSITE_ID, API_KEY)
 	
 	najva.userHandler()
 	'Do not forget to load the layout file created with the visual designer. For example:
