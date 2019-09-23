@@ -9,7 +9,7 @@ Module2=manager
 NumberOfFiles=0
 NumberOfLibraries=2
 NumberOfModules=2
-Version=9.01
+Version=9.3
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: B4A Example
@@ -34,19 +34,19 @@ End Sub
 Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
-
+	Dim najva As NajvaB4aPlugin
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
-	
-	Dim	najva As NajvaB4aPlugin
-	
-	najva.initialize(CAMPAIGN_ID, WEBSITE_ID, API_KEY)
-	
-	najva.userHandler()
 	'Do not forget to load the layout file created with the visual designer. For example:
 	'Activity.LoadLayout("Layout1")
-
+	najva.initialize()
+	Dim token As String = najva.getSubsctibedToken()
+	If token = Null Then
+		Log("token is null")
+	Else
+		Log(token)
+	End If
 End Sub
 
 Sub Activity_Resume
@@ -57,12 +57,19 @@ Sub Activity_Pause (UserClosed As Boolean)
 
 End Sub
 
-
-Sub najvaevent_usersubscribed (token As String)
+Sub najvaevent_usersubscribed(token As String)
+	ToastMessageShow(token,False)
 	Log(token)
-	ToastMessageShow(token,True)
 End Sub
 
-Sub najvaevent_jsonreceived (json As String)
-	Log(json)
+Sub najvaevent_jsonreceived(json As String)
+	ToastMessageShow(json,False)
+End Sub
+
+Sub najvaevent_notificationreceived(data As Object)
+	Log(data)
+End Sub
+
+Sub najvaevent_notificationclicked(data As Object)
+	Log(data)
 End Sub
