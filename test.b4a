@@ -1,15 +1,14 @@
 ﻿Build1=Default,com.najva.sdk.b4ademo
 Group=Default Group
-IconFile=
 Library1=core
 Library2=najva
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~~\n~CreateResourceFromFile(Macro, Najva.NajvaV8)~\n~
-Module1=Starter
-Module2=manager
+Module1=manager
+Module2=Starter
 NumberOfFiles=0
 NumberOfLibraries=2
 NumberOfModules=2
-Version=9.3
+Version=9.9
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: B4A Example
@@ -40,13 +39,8 @@ End Sub
 Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
 	'Activity.LoadLayout("Layout1")
-	najva.initialize()
-	Dim token As String = najva.getSubsctibedToken()
-	If token = Null Then
-		Log("token is null")
-	Else
-		Log(token)
-	End If
+	najva.initialize(False,False)
+	Log(najva.getNajvaToken())
 End Sub
 
 Sub Activity_Resume
@@ -57,19 +51,15 @@ Sub Activity_Pause (UserClosed As Boolean)
 
 End Sub
 
-Sub najvaevent_usersubscribed(token As String)
-	ToastMessageShow(token,False)
+Sub najva_user_subscribed(token As String)
 	Log(token)
 End Sub
 
-Sub najvaevent_jsonreceived(json As String)
-	ToastMessageShow(json,False)
+Sub najva_notification_received(id As String)
+	Log(id)
 End Sub
 
-Sub najvaevent_notificationreceived(data As Object)
-	Log(data)
-End Sub
-
-Sub najvaevent_notificationclicked(data As Object)
-	Log(data)
+Sub najva_notification_clicked(id As String, btn_id As Int)
+	Log(id)
+	Log(btn_id)
 End Sub
